@@ -1,0 +1,13 @@
+node_modules/
+.svelte-kit/
+build/
+/db/*.sqlite3
+/db/*.sqlite3-journal
+/db/*.sqlite3-wal
+/db/*.sqlite3-shm
+/db/PINS.md
+.env
+.env.*
+!.env.example
+.DS_Store
+.obsidian/

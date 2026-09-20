@@ -1,0 +1,1064 @@
+@import 'tailwindcss';
+
+/*
+ * Design tokens — see design/ui-ux.md §3 for the rationale behind these
+ * specific values. Profile colors are per-person (stored as hex in
+ * profiles.color) and applied via inline styles, not these theme colors,
+ * since Tailwind can't statically know a value that lives in the DB.
+ * These @theme colors are for values that ARE known at build time:
+ * status colors and the neutral palette.
+ */
+@theme {
+	--font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
+	--font-display: 'Baloo 2', ui-rounded, 'Inter', sans-serif;
+
+	--color-status-not-started: var(--color-slate-300);
+	--color-status-in-progress: var(--color-amber-500);
+	--color-status-done: var(--color-emerald-500);
+	--color-status-overdue: var(--color-rose-500);
+}
+
+body {
+	@apply bg-slate-50 font-sans text-slate-900;
+	font-family: var(--font-sans);
+}
+
+@keyframes shake {
+	10%,
+	90% {
+		transform: translateX(-2px);
+	}
+	20%,
+	80% {
+		transform: translateX(4px);
+	}
+	30%,
+	50%,
+	70% {
+		transform: translateX(-8px);
+	}
+	40%,
+	60% {
+		transform: translateX(8px);
+	}
+}
+
+.animate-shake {
+	animation: shake 0.4s ease-in-out;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.animate-shake {
+		animation: none;
+	}
+}
+
+/* ——— Brand ——— */
+
+.brand-mark {
+	@apply flex items-center gap-1.5 text-lg font-bold text-slate-800;
+	font-family: var(--font-display);
+}
+
+.brand-mark-hero {
+	@apply flex items-center justify-center gap-2 text-4xl font-bold text-slate-800;
+	font-family: var(--font-display);
+}
+
+.brand-icon {
+	@apply text-emerald-600;
+}
+
+/* ——— Typography ——— */
+
+.page-title {
+	@apply text-xl font-semibold text-slate-800;
+}
+
+.page-title-lg {
+	@apply text-lg font-semibold text-slate-800;
+}
+
+.page-title-spaced {
+	@apply mb-4 text-lg font-semibold text-slate-800;
+}
+
+.page-heading {
+	@apply text-xl font-bold text-slate-900;
+}
+
+.section-title {
+	@apply text-sm font-semibold text-slate-700;
+}
+
+.section-label {
+	@apply mb-2 text-sm font-semibold tracking-wide text-slate-500 uppercase;
+}
+
+.section-block {
+	@apply mt-6;
+}
+
+.text-ellipsis {
+	@apply truncate;
+}
+
+.unit-title {
+	@apply font-semibold text-slate-800;
+}
+
+.unit-title-sm {
+	@apply text-sm font-semibold text-slate-700;
+}
+
+.text-muted {
+	@apply text-sm text-slate-500;
+}
+
+.text-subtle {
+	@apply text-xs text-slate-400;
+}
+
+.text-secondary {
+	@apply text-sm text-slate-600;
+}
+
+.text-body {
+	@apply text-sm font-medium text-slate-800;
+}
+
+.text-danger {
+	@apply text-sm text-rose-600;
+}
+
+.text-score {
+	@apply text-xs text-emerald-600;
+}
+
+.greeting {
+	@apply mt-2 text-lg text-slate-500;
+}
+
+.pin-prompt {
+	@apply text-xl font-semibold text-slate-800;
+}
+
+/* ——— Links ——— */
+
+.link-muted {
+	@apply text-sm text-slate-500 hover:text-slate-700;
+}
+
+.link-back {
+	@apply flex items-center gap-1 self-start text-sm text-slate-500 hover:text-slate-700;
+}
+
+.link-inline {
+	@apply flex items-center gap-1 text-sm font-medium text-slate-700 hover:underline;
+}
+
+.link-quiet {
+	@apply flex items-center gap-1 text-xs font-medium text-slate-500 hover:text-slate-700;
+}
+
+.link-danger {
+	@apply flex items-center gap-1 text-sm text-rose-500 hover:text-rose-700;
+}
+
+.link-danger-sm {
+	@apply flex shrink-0 items-center gap-1 text-xs text-rose-500 hover:text-rose-700;
+}
+
+.link-edit {
+	@apply flex items-center gap-1 text-slate-500 hover:text-slate-700;
+}
+
+.link-edit-sm {
+	@apply flex shrink-0 items-center gap-1 text-xs text-slate-500 hover:text-slate-700;
+}
+
+/* ——— Layout ——— */
+
+.stack {
+	@apply space-y-6;
+}
+
+.stack-tight {
+	@apply space-y-3;
+}
+
+.stack-form {
+	@apply space-y-4;
+}
+
+.stack-form-tight {
+	@apply space-y-3;
+}
+
+.page {
+	@apply mx-auto max-w-2xl px-4 py-6;
+}
+
+.page-wide {
+	@apply mx-auto max-w-4xl px-4 py-6;
+}
+
+.row-between {
+	@apply flex items-center justify-between;
+}
+
+.row-between-gap {
+	@apply flex items-center justify-between gap-3;
+}
+
+.card-header {
+	@apply flex items-center justify-between rounded-2xl border border-slate-200 bg-white p-5;
+}
+
+.row-start {
+	@apply flex items-start justify-between;
+}
+
+.row-baseline {
+	@apply flex items-baseline justify-between;
+}
+
+.row-center {
+	@apply flex items-center gap-2;
+}
+
+.row-gap {
+	@apply flex items-center gap-3;
+}
+
+.grow {
+	@apply min-w-0 flex-1;
+}
+
+.shrink {
+	@apply shrink-0;
+}
+
+.screen-only {
+	@apply print:hidden;
+}
+
+/* ——— Surfaces ——— */
+
+.card {
+	@apply rounded-2xl border border-slate-200 bg-white;
+}
+
+.card-padded {
+	@apply rounded-2xl border border-slate-200 bg-white p-4;
+}
+
+.card-padded-lg {
+	@apply rounded-2xl border border-slate-200 bg-white p-5;
+}
+
+.card-padded-xl {
+	@apply rounded-2xl border border-slate-200 bg-white p-6;
+}
+
+.card-dashed {
+	@apply rounded-2xl border border-dashed border-slate-300 bg-white p-6 text-center text-slate-500;
+}
+
+.card-dashed-lg {
+	@apply rounded-2xl border border-dashed border-slate-300 bg-white p-8 text-center text-slate-500;
+}
+
+.card-empty {
+	@apply flex h-full min-h-[300px] items-center justify-center rounded-2xl border border-dashed border-slate-300 bg-white p-10 text-center text-slate-500;
+}
+
+.list-surface {
+	@apply overflow-hidden rounded-2xl border border-slate-200 bg-white;
+}
+
+.list-divide {
+	@apply mt-3 divide-y divide-slate-100;
+}
+
+.list-divide-tight {
+	@apply mt-1 divide-y divide-slate-100 border-y border-slate-100 print:divide-slate-300 print:border-slate-400;
+}
+
+/* ——— Buttons ——— */
+
+.btn-primary {
+	@apply w-full rounded-lg bg-slate-800 px-3 py-2 text-sm font-semibold text-white hover:bg-slate-700;
+}
+
+.btn-primary-sm {
+	@apply rounded-lg bg-slate-800 px-3 py-1.5 text-sm font-medium text-white hover:bg-slate-700;
+}
+
+.btn-print {
+	@apply flex items-center gap-1.5 rounded-lg bg-slate-800 px-3 py-1.5 text-sm font-medium text-white hover:bg-slate-700 print:hidden;
+}
+
+.btn-chip {
+	@apply flex items-center gap-1 rounded-full bg-slate-100 px-3 py-1.5 text-xs font-medium text-slate-600 hover:bg-slate-200;
+}
+
+.btn-chip-sm {
+	@apply flex items-center gap-1 rounded-full bg-slate-100 px-2 py-1 text-xs font-medium text-slate-600 hover:bg-slate-200;
+}
+
+.btn-chip-xs {
+	@apply flex items-center gap-1 rounded-full bg-slate-100 px-3 py-1 text-xs font-medium text-slate-600 hover:bg-slate-200;
+}
+
+.btn-icon {
+	@apply rounded-full p-2 text-slate-500 hover:bg-slate-100;
+}
+
+.btn-icon-sm {
+	@apply shrink-0 rounded-full p-1 transition hover:bg-slate-100;
+}
+
+.btn-icon-link {
+	@apply shrink-0 rounded-full p-1.5 text-slate-400 transition hover:bg-slate-100 hover:text-slate-600;
+}
+
+.btn-modal-close {
+	@apply rounded-full p-1 text-slate-400 hover:bg-slate-100 hover:text-slate-600;
+}
+
+/* ——— Forms ——— */
+
+.field {
+	@apply block;
+}
+
+.field-label {
+	@apply text-sm font-medium text-slate-700;
+}
+
+.field-label-sm {
+	@apply text-xs font-medium text-slate-500;
+}
+
+.input {
+	@apply mt-1 w-full rounded-lg border border-slate-300 px-3 py-2 text-sm;
+}
+
+.input-sm {
+	@apply mt-1 rounded-lg border border-slate-300 px-3 py-1.5 text-sm;
+}
+
+.form-grid-2 {
+	@apply grid grid-cols-2 gap-3;
+}
+
+.form-inline {
+	@apply mt-4 flex flex-wrap items-end gap-3;
+}
+
+/* ——— Progress ——— */
+
+.progress-row {
+	@apply mb-6 flex items-center gap-2;
+}
+
+.progress-inline {
+	@apply mt-2 flex items-center gap-2;
+}
+
+.progress-track {
+	@apply h-2 flex-1 rounded-full bg-slate-200;
+}
+
+.progress-fill {
+	@apply h-2 rounded-full transition-all;
+}
+
+.progress-label {
+	@apply text-xs whitespace-nowrap text-slate-500;
+}
+
+/* ——— Status ——— */
+
+.status-icon {
+	@apply inline-flex items-center gap-1 text-sm font-medium;
+}
+
+.status-label {
+	@apply hidden sm:inline print:inline;
+}
+
+.status-not-started {
+	@apply text-slate-400;
+}
+
+.status-in-progress {
+	@apply text-amber-500;
+}
+
+.status-done {
+	@apply text-emerald-500;
+}
+
+.status-overdue {
+	@apply text-rose-500;
+}
+
+.status-dot {
+	@apply inline-flex h-6 w-6 items-center justify-center rounded-full;
+}
+
+.status-dot-none {
+	@apply bg-transparent;
+}
+
+.status-dot-not-started {
+	@apply bg-slate-300 text-white;
+}
+
+.status-dot-in-progress {
+	@apply bg-amber-500 text-white;
+}
+
+.status-dot-done {
+	@apply bg-emerald-500 text-white;
+}
+
+.status-dot-overdue {
+	@apply bg-rose-500 text-white;
+}
+
+/* ——— Profile picker ——— */
+
+.picker-screen {
+	@apply flex min-h-screen flex-col items-center justify-center gap-10 bg-gradient-to-b from-slate-50 to-white px-6 py-16;
+}
+
+.picker-hero {
+	@apply text-center;
+}
+
+.picker-groups {
+	@apply flex flex-col items-center gap-10;
+}
+
+.picker-kids {
+	@apply flex flex-wrap justify-center gap-6;
+}
+
+.picker-parents {
+	@apply flex flex-wrap justify-center gap-4;
+}
+
+.picker-pin {
+	@apply flex flex-col items-center gap-6;
+}
+
+.profile-card {
+	@apply flex flex-col items-center gap-2 rounded-2xl border border-slate-200 bg-white shadow-sm transition hover:-translate-y-0.5 hover:shadow-md active:translate-y-0 active:shadow-sm;
+}
+
+.profile-card-lg {
+	@apply w-36 px-4 py-6;
+}
+
+.profile-card-sm {
+	@apply w-28 px-3 py-3;
+}
+
+.profile-avatar {
+	@apply flex items-center justify-center rounded-full border-2;
+}
+
+.profile-avatar-lg {
+	@apply h-16 w-16 text-3xl;
+}
+
+.profile-avatar-sm {
+	@apply h-10 w-10 text-xl;
+}
+
+.profile-name {
+	@apply font-semibold text-slate-800;
+}
+
+.profile-name-lg {
+	@apply text-base;
+}
+
+.profile-name-sm {
+	@apply text-sm;
+}
+
+.profile-subtitle {
+	@apply text-xs text-slate-500;
+}
+
+/* ——— PIN pad ——— */
+
+.pin-pad {
+	@apply flex flex-col items-center gap-6;
+}
+
+.pin-dots {
+	@apply flex gap-3;
+}
+
+.pin-dot {
+	@apply h-4 w-4 rounded-full border-2 transition-colors;
+}
+
+.pin-grid {
+	@apply grid grid-cols-3 gap-3;
+}
+
+.pin-spacer {
+	@apply h-14 w-14;
+}
+
+.pin-key {
+	@apply flex h-14 w-14 items-center justify-center rounded-xl bg-slate-100 text-slate-600 transition hover:bg-slate-200 active:scale-95;
+}
+
+.pin-key-digit {
+	@apply h-14 w-14 rounded-xl bg-slate-100 text-xl font-semibold text-slate-800 transition hover:bg-slate-200 active:scale-95;
+}
+
+/* ——— Modal ——— */
+
+.modal-backdrop {
+	@apply fixed inset-0 z-50 flex items-center justify-center bg-slate-900/40 p-4;
+}
+
+.modal-panel {
+	@apply max-h-[90vh] w-full max-w-md overflow-y-auto rounded-2xl bg-white p-6 shadow-xl;
+}
+
+.modal-header {
+	@apply mb-4 flex items-center justify-between;
+}
+
+.modal-title {
+	@apply text-lg font-semibold text-slate-800;
+}
+
+/* ——— Lesson row ——— */
+
+.lesson-row {
+	@apply flex items-center gap-3 border-b border-slate-100 px-4 py-3 last:border-b-0;
+}
+
+.lesson-meta {
+	@apply flex flex-wrap items-center gap-2;
+}
+
+.lesson-chip {
+	@apply rounded-full bg-slate-100 px-2 py-0.5 text-xs font-medium text-slate-600;
+}
+
+.lesson-chip-score {
+	@apply rounded-full bg-emerald-50 px-2 py-0.5 text-xs font-medium text-emerald-700;
+}
+
+.lesson-title {
+	@apply truncate text-sm font-medium text-slate-800;
+}
+
+.lesson-meta-line {
+	@apply text-xs text-slate-400;
+}
+
+.lesson-admin-row {
+	@apply flex items-center gap-3 py-2;
+}
+
+.report-lesson-row {
+	@apply flex items-center justify-between gap-3 py-1.5 text-sm;
+}
+
+.report-lesson-title {
+	@apply truncate text-slate-700;
+}
+
+.report-lesson-score {
+	@apply shrink-0 text-xs text-slate-500;
+}
+
+/* ——— Parent shell ——— */
+
+.parent-shell {
+	@apply min-h-screen bg-slate-50 print:bg-white;
+}
+
+.parent-header {
+	@apply border-b border-slate-200 bg-white px-6 py-3 print:hidden;
+}
+
+.parent-header-inner {
+	@apply mx-auto flex max-w-6xl items-center justify-between;
+}
+
+.parent-meta {
+	@apply flex items-center gap-4 text-sm text-slate-500;
+}
+
+.parent-switch {
+	@apply hover:text-slate-700;
+}
+
+.parent-body {
+	@apply mx-auto flex max-w-6xl gap-6 px-4 py-6 print:block print:max-w-none print:p-0;
+}
+
+.parent-nav {
+	@apply w-52 shrink-0 space-y-1 print:hidden;
+}
+
+.parent-nav-link {
+	@apply flex items-center gap-2 rounded-lg px-3 py-2 text-sm font-medium text-slate-700 hover:bg-white hover:shadow-sm;
+}
+
+.parent-content {
+	@apply min-w-0 flex-1;
+}
+
+/* ——— Parent dashboard ——— */
+
+.week-table-wrap {
+	@apply mt-4 overflow-x-auto rounded-2xl border border-slate-200 bg-white;
+}
+
+.week-table {
+	@apply w-full text-sm;
+}
+
+.week-table-head {
+	@apply border-b border-slate-100 text-left text-slate-500;
+}
+
+.week-table-th {
+	@apply px-2 py-2 text-center font-medium;
+}
+
+.week-table-th-name {
+	@apply px-4 py-2 font-medium;
+}
+
+.week-table-row {
+	@apply border-b border-slate-50 last:border-b-0;
+}
+
+.week-table-name {
+	@apply px-4 py-3 font-medium text-slate-700;
+}
+
+.week-table-cell {
+	@apply px-2 py-3 text-center;
+}
+
+.kid-summary-grid {
+	@apply mt-6 grid gap-4 sm:grid-cols-3;
+}
+
+.kid-summary-stats {
+	@apply mt-3 space-y-1 text-sm text-slate-600;
+}
+
+.kid-summary-stat {
+	@apply flex justify-between;
+}
+
+.kid-summary-emoji {
+	@apply text-2xl;
+}
+
+.kid-summary-grade {
+	@apply text-xs text-slate-500;
+}
+
+.kid-summary-link {
+	@apply mt-3 flex items-center gap-1 text-sm font-medium text-slate-700 hover:underline;
+}
+
+/* ——— Kid shell ——— */
+
+.kid-shell {
+	@apply flex min-h-screen flex-col bg-slate-50 sm:flex-row;
+}
+
+.kid-sidebar {
+	@apply hidden w-72 shrink-0 flex-col border-r border-slate-200 bg-white sm:flex;
+}
+
+.kid-banner {
+	@apply p-5 text-white;
+}
+
+.kid-banner-link {
+	@apply flex items-center gap-1 text-xs text-white/80 hover:text-white;
+}
+
+.kid-banner-identity {
+	@apply mt-2 flex items-center gap-2;
+}
+
+.kid-banner-emoji {
+	@apply text-2xl;
+}
+
+.kid-banner-name {
+	@apply text-lg font-bold;
+}
+
+.kid-sidebar-nav {
+	@apply flex-1 overflow-y-auto p-3;
+}
+
+.kid-nav-link {
+	@apply flex items-center gap-2 rounded-lg px-3 py-2 text-sm font-medium text-slate-700 hover:bg-slate-100;
+}
+
+.kid-nav-link-row {
+	@apply flex items-center justify-between rounded-lg px-3 py-2 text-sm font-medium text-slate-700 hover:bg-slate-100;
+}
+
+.kid-nav-section {
+	@apply mt-4 mb-1 px-3 text-xs font-semibold tracking-wide text-slate-400 uppercase;
+}
+
+.kid-nav-empty {
+	@apply px-3 text-sm text-slate-400;
+}
+
+.kid-nav-dot {
+	@apply h-2 w-2 shrink-0 rounded-full;
+}
+
+.kid-nav-count {
+	@apply shrink-0 text-xs text-slate-400;
+}
+
+.kid-main {
+	@apply flex min-w-0 flex-1 flex-col;
+}
+
+.kid-phone-header {
+	@apply flex items-center justify-between px-4 py-3 text-white sm:hidden;
+}
+
+.kid-phone-link {
+	@apply flex items-center gap-1 text-xs text-white/80;
+}
+
+.kid-phone-name {
+	@apply font-bold;
+}
+
+.kid-phone-spacer {
+	@apply w-12;
+}
+
+.kid-content {
+	@apply flex-1 pb-16 sm:pb-0;
+}
+
+.kid-tab-bar {
+	@apply fixed inset-x-0 bottom-0 z-40 flex border-t border-slate-200 bg-white sm:hidden;
+}
+
+.kid-tab {
+	@apply flex flex-1 flex-col items-center gap-0.5 py-2 text-xs font-medium;
+}
+
+.kid-tab-active {
+	@apply text-slate-900;
+}
+
+.kid-tab-idle {
+	@apply text-slate-400;
+}
+
+/* ——— Kid subjects list ——— */
+
+.subject-list {
+	@apply space-y-3;
+}
+
+.subject-list-link {
+	@apply flex items-center justify-between rounded-2xl border border-slate-200 bg-white p-4 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md;
+}
+
+.subject-list-dot {
+	@apply h-3 w-3 rounded-full;
+}
+
+.subject-list-name {
+	@apply font-medium text-slate-800;
+}
+
+.subject-list-count {
+	@apply text-sm text-slate-500;
+}
+
+.subject-progress-card {
+	@apply mb-6 rounded-2xl border border-slate-200 bg-white p-5;
+}
+
+.unit-details {
+	@apply mb-3 overflow-hidden rounded-2xl border border-slate-200 bg-white;
+}
+
+.unit-summary {
+	@apply cursor-pointer list-none px-4 py-3 font-semibold text-slate-800 select-none;
+}
+
+.unit-count {
+	@apply ml-2 text-xs font-normal text-slate-400;
+}
+
+.unit-lessons {
+	@apply border-t border-slate-100;
+}
+
+/* ——— Calendar ——— */
+
+.cal-nav {
+	@apply mb-4 flex items-center justify-between;
+}
+
+.cal-title {
+	@apply text-sm font-semibold text-slate-600;
+}
+
+.cal-week-grid {
+	@apply hidden sm:grid sm:grid-cols-7 sm:gap-2;
+}
+
+.cal-day {
+	@apply min-h-[8rem] rounded-xl border border-slate-200 bg-white p-2;
+}
+
+.cal-day-today {
+	@apply border-slate-400;
+}
+
+.cal-day-label {
+	@apply text-center text-xs font-semibold text-slate-500;
+}
+
+.cal-day-date {
+	@apply text-center text-xs text-slate-400;
+}
+
+.cal-day-events {
+	@apply mt-2 space-y-1;
+}
+
+.cal-event {
+	@apply block w-full truncate rounded-lg bg-slate-100 px-2 py-1 text-left text-xs text-slate-700 hover:bg-slate-200;
+}
+
+.cal-phone {
+	@apply sm:hidden;
+}
+
+.cal-strip {
+	@apply flex gap-2 overflow-x-auto pb-2;
+}
+
+.cal-day-picker {
+	@apply flex shrink-0 flex-col items-center rounded-xl border px-3 py-2;
+}
+
+.cal-day-picker-active {
+	@apply border-slate-800 bg-slate-800 text-white;
+}
+
+.cal-day-picker-idle {
+	@apply border-slate-200 bg-white text-slate-600;
+}
+
+.cal-day-picker-weekday {
+	@apply text-xs font-medium;
+}
+
+.cal-day-picker-day {
+	@apply text-sm font-bold;
+}
+
+.cal-agenda-date {
+	@apply my-3 text-sm font-medium text-slate-600;
+}
+
+.cal-parent-stack {
+	@apply space-y-6;
+}
+
+.cal-kid-header {
+	@apply mb-3 flex items-center justify-between;
+}
+
+.cal-kid-name {
+	@apply flex items-center gap-2 font-semibold text-slate-800;
+}
+
+.cal-kid-grid {
+	@apply grid grid-cols-7 gap-2;
+}
+
+.cal-cell {
+	@apply min-h-[5rem] rounded-lg border border-slate-100 p-1.5;
+}
+
+.cal-cell-today {
+	@apply border-slate-400;
+}
+
+.cal-cell-label {
+	@apply text-center text-[10px] font-semibold text-slate-400;
+}
+
+.cal-cell-events {
+	@apply mt-1 space-y-1;
+}
+
+.cal-cell-event {
+	@apply truncate rounded bg-slate-100 px-1 py-0.5 text-[10px] text-slate-600;
+}
+
+/* ——— Parent subjects ——— */
+
+.subjects-layout {
+	@apply flex items-start gap-6;
+}
+
+.subjects-tree {
+	@apply w-72 shrink-0 rounded-2xl border border-slate-200 bg-white p-3;
+}
+
+.subjects-tree-header {
+	@apply mb-2 flex items-center justify-between px-1;
+}
+
+.subjects-tree-list {
+	@apply space-y-3;
+}
+
+.subjects-tree-subject {
+	@apply flex items-center justify-between rounded-lg px-2 py-1.5 text-sm font-medium text-slate-800 hover:bg-slate-50;
+}
+
+.subjects-tree-category {
+	@apply shrink-0 text-xs text-slate-400;
+}
+
+.subjects-tree-assignment {
+	@apply ml-3 flex items-center justify-between rounded-lg px-2 py-1 text-xs text-slate-600 hover:bg-slate-50;
+}
+
+.subjects-tree-count {
+	@apply shrink-0 text-slate-400;
+}
+
+.subjects-tree-empty {
+	@apply ml-3 text-xs text-slate-400;
+}
+
+.subjects-main {
+	@apply min-w-0 flex-1;
+}
+
+.subject-meta {
+	@apply text-sm text-slate-500 capitalize;
+}
+
+.assignment-eyebrow {
+	@apply text-xs font-medium text-slate-400;
+}
+
+.assignment-actions {
+	@apply flex shrink-0 items-center gap-3 text-xs;
+}
+
+.assignment-empty {
+	@apply mt-3 text-sm text-slate-400;
+}
+
+.assignment-list-link {
+	@apply flex items-center gap-2 text-sm font-medium text-slate-800 hover:underline;
+}
+
+.assignment-grade {
+	@apply text-xs font-normal text-slate-400;
+}
+
+.assignment-count {
+	@apply text-xs text-slate-500;
+}
+
+.assignment-list-item {
+	@apply flex items-center justify-between py-2;
+}
+
+.form-error {
+	@apply mt-2 text-sm text-rose-600;
+}
+
+.unit-description {
+	@apply mt-1 text-sm text-slate-500;
+}
+
+/* ——— Reports ——— */
+
+.reports-intro {
+	@apply mt-1 text-sm text-slate-500;
+}
+
+.reports-grid {
+	@apply mt-4 grid gap-3 sm:grid-cols-3;
+}
+
+.report-card-link {
+	@apply flex items-center justify-between rounded-2xl border border-slate-200 bg-white p-4 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md;
+}
+
+.report-card-emoji {
+	@apply text-xl;
+}
+
+.report-card-name {
+	@apply block font-medium text-slate-800;
+}
+
+.report-card-grade {
+	@apply block text-xs text-slate-500;
+}
+
+.report-card-action {
+	@apply flex items-center gap-1 text-xs font-medium text-slate-500;
+}
+
+.report-doc {
+	@apply mt-4 rounded-2xl border border-slate-200 bg-white p-6 print:mt-0 print:rounded-none print:border-none print:p-0 print:shadow-none;
+}
+
+.report-header {
+	@apply flex items-start justify-between border-b border-slate-200 pb-4 print:border-black;
+}
+
+.report-section {
+	@apply mt-6;
+}
+
+.report-unit {
+	@apply mt-3;
+}
+
+.report-empty {
+	@apply mt-4 text-sm text-slate-400;
+}
+
+.report-signatures {
+	@apply mt-10 hidden gap-8 border-t border-black pt-4 text-sm print:flex;
+}
